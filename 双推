@@ -1,0 +1,57 @@
+
+## 1. 检查旧远程配置
+
+```powershell
+git remote -v
+```
+
+如果正在重新配置，而且已有名为 both 的旧配置，先执行：
+
+```powershell
+git remote remove both
+```
+
+没有 both 就跳过。此命令清除该本地连接配置及关联，不删除代码、本地提交或服务器仓库。其他远程配置不需要为使用 both 而全部删除。
+
+界面方式：命令面板 Git: Remove Remote → both。
+
+## 2. 创建远程配置，并添加两个推送地址
+
+第一条的空白填写【GitHub 项目仓库地址，作为获取来源】：
+
+```powershell
+git remote add both "________"
+```
+
+创建名为 both 的远程配置。界面方式：Git: Add Remote → 输入 GitHub 地址 → 名称 both。终端和界面二选一。
+
+第二条的空白仍填写【同一个 GitHub 项目仓库地址，作为推送目标之一】：
+
+```powershell
+git remote set-url --add --push both "________"
+```
+
+第三条的空白填写【GitLab 项目仓库地址，作为另一个推送目标】：
+
+```powershell
+git remote set-url --add --push both "________"
+```
+
+后两条用终端执行。--add 表示追加，--push 表示设置推送地址列表；命令本身不会上传代码。
+
+## 3. 核对地址
+
+```powershell
+git remote -v
+```
+
+应显示：both 的 GitHub 地址一条 fetch、GitHub 地址一条 push、GitLab 地址一条 push。
+
+## 4. 首次双推送
+
+```powershell
+git push -u both main
+```
+
+推送 main 到两个目标，并建立上游关联。按提示完成各平台认证。
+
